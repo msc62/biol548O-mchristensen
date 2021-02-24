@@ -90,4 +90,5 @@ surveys_D0_mass_by_year <- surveys %>%
   group_by(year)%>%
   summarize(avg_weight = mean (weight, na.rm = TRUE))
 
+##End of lab
 
