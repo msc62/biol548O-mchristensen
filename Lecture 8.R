@@ -59,6 +59,27 @@ if(age_class == "sapling"){
 y  
 
 
+##Exercise 4
 
+get_mass_from_length<- function(length, a, b){
+  mass <- a * length ^ b
+  return(mass)
+}
 
+get_mass_from_length_by_name<- function(length, name){
+  if (name == "Stegosauria"){
+    mass<- 10.95* length^2.64
+  } else if (name == "Theropoda") {
+    mass<- 0.73* length^3.63
+  } else if (name == "Sauropoda") {
+    mass<- 214.44* length^1.46
+  } else {
+    mass<- "NA"
+  }
+  return(mass)
+}
 
+get_mass_from_length_by_name(10, "Stegosauria")
+get_mass_from_length_by_name(8, "Theropoda")
+get_mass_from_length_by_name(12, "Sauropoda")
+get_mass_from_length_by_name(13, "Anklyosauria")
