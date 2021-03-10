@@ -60,4 +60,13 @@ get_mass_from_length(22, 214.44, 1.46)
 get_mass_from_length(16)
 
 
+##Exercise 4
+#a function that convert kilos to lbs
+calc_kg_to_lbs <- function(kg){
+  lbs<- kg*2.205
+  return(lbs)
+}
 
+#determine mass in lbs for a 12 m long stegosauria (has been estimated as 10.95 and b has been estimated as 2.64 (Seebacher2001).)
+
+calc_kg_to_lbs(get_mass_from_length(12,a=10.95, b=2.64))
