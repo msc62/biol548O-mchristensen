@@ -34,4 +34,12 @@ masses > 40
 
 
 
+#Exercise 2
+age_class = "sapling"
+if(age_class == "sapling"){
+  y <- 10
+}
+
+
+
 
