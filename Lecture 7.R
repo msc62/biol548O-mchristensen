@@ -20,3 +20,24 @@ grams_converted <- calc_lbs_to_g(3.75)
 
 
 ##Exercise 2
+#The length of an organism is typically strongly correlated with its body mass. This is useful because it allows us to estimate the mass of an organism even if we only know its length. This relationship generally takes the form:
+  
+#  Mass = a * Lengthb
+
+#Where the parameters a and b vary among groups. This allometric approach is regularly used to estimate the mass of dinosaurs since we cannot weigh something that is only preserved as bones.
+
+#The following function estimates the mass of an organism in kg based on its length in meters for a particular set of parameter values, those for Theropoda (where a has been estimated as 0.73 and b has been estimated as 3.63; Seebacher 2001).
+
+get_mass_from_length_theropoda <- function(length){
+  mass <- 0.73 * length ^ 3.63
+  return(mass)
+}
+
+get_mass_from_length_theropoda(16)
+
+get_mass_from_length<- function(length, a, b){
+  mass <- a * length ^ b
+  return(mass)
+}
+
+get_mass_from_length(26, 214.44, 1.46)
