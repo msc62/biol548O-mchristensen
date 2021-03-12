@@ -1,0 +1,60 @@
+13.2.1 Exercises
+1.Imagine you wanted to draw (approximately) the route each plane flies from its origin to its destination. What variables would you need? What tables would you need to combine?
+
+We need the plane$tailnum to connect to flights$tailnum. Then we would need to use airports$faa to connect flights$flight and flights$tailnum with flights$origin and flights$destination.For each combination of the airports$lat & airports$lon would be used for each of flights$origin and flights$destination to determine distance.
+
+2.I forgot to draw the relationship between weather and airports. What is the relationship and how should it appear in the diagram? 
+
+airports$faa is related to weather$origin
+
+3.weather only contains information for the origin (NYC) airports. If it contained weather records for all airports in the USA, what additional relation would it define with flights?
+
+flight arrival time
+
+13.4.6
+
+1.Compute the average delay by destination, then join on the airports data frame so you can show the spatial distribution of delays. Here’s an easy way to draw a map of the United States:
+airports %>%
+  semi_join(flights, c("faa" = "dest")) %>%
+  ggplot(aes(lon, lat)) +
+    borders("state") +
+    geom_point() +
+    coord_quickmap()
+    
+(Don’t worry if you don’t understand what semi_join() does — you’ll learn about it next.)
+
+You might want to use the size or colour of the points to display the average delay for each airport.
+
+Average Arrival Delays.png
+
+2.Add the location of the origin and destination (i.e. the lat and lon) to flights.
+
+airport_locations <- airports %>%
+  select(faa, lat, lon)
+
+flights %>%
+  select(year:day, hour, origin, dest) %>%
+  left_join(airport_locations, by = c("origin" = "faa")) %>%
+  left_join(airport_locations,by = c("dest" = "faa"),suffix = c("_origin", "_dest"))
+
+3.Is there a relationship between the age of a plane and its delays?
+Older planes have longer delays. 
+
+
+13.5.1
+
+2.Filter flights to only show flights with planes that have flown at least 100 flights.
+
+planes_100F <- 
+  filter(flights) %>%
+  group_by(tailnum) %>%
+  add_count() %>%
+  filter(n > 100)%>%
+  unique(planes_100F[c("tailnum")])
+
+5.What does anti_join(flights, airports, by = c("dest" = "faa")) tell you? 
+
+Returns a list of flights that went to an airport that is not in the FAA list of destinations i.e.) foreign flights.
+
+What does anti_join(airports, flights, by = c("faa" = "dest")) tell you?
+There are airports that flights are arriving from but are not in the domestic airport list. 
